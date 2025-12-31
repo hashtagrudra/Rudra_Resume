@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rudra Pratap Sahu - Interactive Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neutral-warm': '#fdfcf8', 
+                        'stone-dark': '#292524', 
+                        'stone-light': '#a8a29e', 
+                        'earth-gold': '#b45309', 
+                        'earth-muted': '#d6d3d1', 
+                        'soft-blue': '#e0f2fe',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a29e; }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 300px; 
+            max-height: 350px;
+        }
+        @media (max-width: 640px) { .chart-container { height: 250px; } }
+
+        .section-fade { animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .nav-link.active { color: #b45309; font-weight: 700; border-bottom: 2px solid #b45309; }
+        li { margin-bottom: 0.25rem; }
+    </style>
+</head>
+<body class="bg-neutral-warm text-stone-dark font-sans leading-relaxed selection:bg-earth-gold selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-earth-muted shadow-sm h-14">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex justify-between h-full items-center">
+                <div class="font-serif text-lg font-bold tracking-wider text-stone-dark">R.P. SAHU</div>
+                <div class="hidden md:flex space-x-6">
+                    <button onclick="scrollToSection('overview')" class="nav-link text-stone-600 hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors" id="nav-overview">Overview</button>
+                    <button onclick="scrollToSection('experience')" class="nav-link text-stone-600 hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors" id="nav-experience">Experience</button>
+                    <button onclick="scrollToSection('skills')" class="nav-link text-stone-600 hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors" id="nav-skills">Skills</button>
+                    <button onclick="scrollToSection('education')" class="nav-link text-stone-600 hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors" id="nav-education">Academics</button>
+                    <button onclick="scrollToSection('personal')" class="nav-link text-stone-600 hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors" id="nav-personal">Profile</button>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="text-stone-500 hover:text-stone-900 p-1">☰</button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-md">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <button onclick="scrollToSection('overview'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 hover:bg-stone-50">Overview</button>
+                <button onclick="scrollToSection('experience'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 hover:bg-stone-50">Experience</button>
+                <button onclick="scrollToSection('skills'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 hover:bg-stone-50">Skills</button>
+                <button onclick="scrollToSection('education'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 hover:bg-stone-50">Education</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+        <!-- Hero Section -->
+        <section id="overview" class="section-fade grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-7 space-y-4">
+                <div class="inline-block bg-stone-100 px-3 py-0.5 rounded-full text-xs font-semibold tracking-wide text-earth-gold mb-1">MARKETING & SALES PROFESSIONAL</div>
+                <h1 class="font-serif text-4xl md:text-5xl font-bold text-stone-900 leading-tight">
+                    Rudra Pratap <span class="text-earth-gold">Sahu</span>
+                </h1>
+                <p class="text-base text-stone-600 max-w-2xl leading-relaxed">
+                    A dynamic professional combining military discipline with modern marketing acumen. Experienced in <strong>Sales Strategy, Event Management, and Customer Relations</strong>. Currently driving growth at Raipur Yamaha Autocare.
+                </p>
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <a href="mailto:rudrapr03@gmail.com" class="bg-stone-900 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-earth-gold transition-colors shadow-md">Contact Me</a>
+                    <a href="https://www.linkedin.com/in/rudra-sahu" target="_blank" class="border border-stone-300 text-stone-700 px-5 py-2 rounded-md text-sm font-medium hover:border-earth-gold hover:text-earth-gold transition-colors">LinkedIn</a>
+                </div>
+                <div class="flex text-xs text-stone-500 pt-2 space-x-4">
+                    <span>📍 Raipur, Chhattisgarh</span>
+                    <span>📞 6260583763</span>
+                    <span>✉️ rudrapr03@gmail.com</span>
+                </div>
+            </div>
+            
+            <div class="md:col-span-5 bg-white p-5 rounded-xl shadow-md border border-stone-100">
+                <!-- PHOTO SECTION -->
+                <div class="flex justify-center mb-5">
+                    <div class="w-32 h-40 rounded-lg overflow-hidden border-4 border-white shadow-lg bg-stone-200">
+                        <!-- CORRECTED PATH: Just the filename -->
+                        <img src="rudra.jpg" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=Rudra+Pratap+Sahu&background=b45309&color=fff&size=512&font-size=0.35';" alt="Rudra Pratap Sahu" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <h3 class="font-serif text-lg font-bold mb-3 text-center md:text-left">Snapshot</h3>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between border-b border-stone-50 pb-1">
+                        <span class="text-stone-500">Current Role</span>
+                        <span class="font-bold text-stone-900">Sales & Marketing Exec.</span>
+                    </div>
+                    <div class="flex justify-between border-b border-stone-50 pb-1">
+                        <span class="text-stone-500">Highest Ed.</span>
+                        <span class="font-bold text-stone-900">PGDM (Marketing)</span>
+                    </div>
+                    <div class="flex justify-between pb-1">
+                        <span class="text-stone-500">Exp. Years</span>
+                        <span class="font-bold text-stone-900">~4+ Years</span>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <h4 class="text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2 text-center md:text-left">Core Focus</h4>
+                    <div class="flex flex-wrap gap-1.5 justify-center md:justify-start">
+                        <span class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-[10px] font-medium border border-blue-100">Sales Strategy</span>
+                        <span class="px-2 py-0.5 bg-amber-50 text-amber-700 rounded text-[10px] font-medium border border-amber-100">Events</span>
+                        <span class="px-2 py-0.5 bg-green-50 text-green-700 rounded text-[10px] font-medium border border-green-100">Leadership</span>
+                        <span class="px-2 py-0.5 bg-purple-50 text-purple-700 rounded text-[10px] font-medium border border-purple-100">Negotiation</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section-fade scroll-mt-20 border-t border-stone-100 pt-8">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-6">
+                <div>
+                    <h2 class="font-serif text-2xl font-bold">Professional Experience</h2>
+                    <p class="text-sm text-stone-500 mt-1">Full history including current and past roles. Click items for details.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div class="md:col-span-5 space-y-4">
+                    <div class="bg-white rounded-lg border border-stone-200 overflow-hidden shadow-sm">
+                        <div id="job-list" class="divide-y divide-stone-100"></div>
+                    </div>
+                </div>
+                <div class="md:col-span-7 bg-stone-50 p-6 rounded-lg border border-stone-200 relative min-h-[300px]">
+                    <div id="job-detail-content" class="transition-opacity duration-200"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills & Competency -->
+        <section id="skills" class="section-fade scroll-mt-20 border-t border-stone-100 pt-8">
+            <h2 class="font-serif text-2xl font-bold mb-6">Competency Matrix</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm">
+                    <div class="chart-container" style="height: 250px;">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="bg-blue-50/50 p-3 rounded border border-blue-100">
+                        <h4 class="font-bold text-stone-800 text-sm mb-1">Professional Skills</h4>
+                        <p class="text-xs text-stone-600 leading-relaxed">Time Management, Leadership, Negotiation, Product Knowledge, Event Planning, Strategic Thinking.</p>
+                    </div>
+                    <div class="bg-emerald-50/50 p-3 rounded border border-emerald-100">
+                        <h4 class="font-bold text-stone-800 text-sm mb-1">Interpersonal Skills</h4>
+                        <p class="text-xs text-stone-600 leading-relaxed">Convincing Power, Diplomatic Communication, Relationship Building, Optimism, Team Collaboration.</p>
+                    </div>
+                    <div class="bg-purple-50/50 p-3 rounded border border-purple-100">
+                        <h4 class="font-bold text-stone-800 text-sm mb-1">Technical Proficiency</h4>
+                        <p class="text-xs text-stone-600 leading-relaxed">MS Office Suite (Excel, PowerPoint, Word), Computer Operations, Business Communication Tools.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & Projects -->
+        <section id="education" class="section-fade scroll-mt-20 border-t border-stone-100 pt-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="font-serif text-2xl font-bold">Academic & Projects</h2>
+                <div class="flex bg-stone-100 p-1 rounded-lg">
+                    <button onclick="switchTab('edu')" id="tab-edu" class="px-4 py-1.5 rounded-md text-xs font-bold transition-all bg-white text-stone-800 shadow-sm">Education</button>
+                    <button onclick="switchTab('proj')" id="tab-proj" class="px-4 py-1.5 rounded-md text-xs font-bold transition-all text-stone-500 hover:text-stone-800">Projects</button>
+                </div>
+            </div>
+            <div id="view-edu" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm">
+                    <div class="text-xs font-bold text-earth-gold mb-1">2023 (Pursuing)</div>
+                    <h3 class="font-bold text-sm text-stone-900">Ph.D.</h3>
+                    <p class="text-xs text-stone-600">PRSU, Raipur</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm">
+                    <div class="text-xs font-bold text-stone-500 mb-1">2021</div>
+                    <h3 class="font-bold text-sm text-stone-900">PGDM (Marketing)</h3>
+                    <p class="text-xs text-stone-600">DY Patil, Pune</p>
+                    <div class="mt-2 text-[10px] bg-stone-100 inline-block px-1.5 py-0.5 rounded text-stone-500">Score: 63%</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm">
+                    <div class="text-xs font-bold text-stone-500 mb-1">2019</div>
+                    <h3 class="font-bold text-sm text-stone-900">B.Com</h3>
+                    <p class="text-xs text-stone-600">PRSU, Raipur</p>
+                    <div class="mt-2 text-[10px] bg-stone-100 inline-block px-1.5 py-0.5 rounded text-stone-500">Score: 50%</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm">
+                    <div class="text-xs font-bold text-stone-500 mb-1">2016</div>
+                    <h3 class="font-bold text-sm text-stone-900">12th (Commerce)</h3>
+                    <p class="text-xs text-stone-600">Kendriya Vidyalaya</p>
+                    <div class="mt-2 text-[10px] bg-stone-100 inline-block px-1.5 py-0.5 rounded text-stone-500">Score: 78%</div>
+                </div>
+            </div>
+            <div id="view-proj" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm hover:border-earth-gold transition-colors">
+                    <h3 class="font-bold text-sm text-stone-900 mb-2">Finance & Economy</h3>
+                    <ul class="space-y-1.5 text-xs text-stone-600">
+                        <li class="flex items-start"><span class="text-earth-gold mr-2">•</span>60-Day Financial Statement Study (RBI)</li>
+                        <li class="flex items-start"><span class="text-earth-gold mr-2">•</span>Accounting Trends in Manufacturing</li>
+                        <li class="flex items-start"><span class="text-earth-gold mr-2">•</span>Inflation & Deflation Analysis</li>
+                        <li class="flex items-start"><span class="text-earth-gold mr-2">•</span>Effects of Recession Study</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-stone-200 shadow-sm hover:border-earth-gold transition-colors">
+                    <h3 class="font-bold text-sm text-stone-900 mb-2">Political Science</h3>
+                    <p class="text-xs text-stone-600 mb-2">Complete report on 2019 General Election (17th Lok Sabha).</p>
+                    <div class="text-[10px] bg-stone-50 p-2 rounded text-stone-500 italic">Analyzed voter behavior, campaign impact, and regional outcomes.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal & Footer -->
+        <section id="personal" class="section-fade scroll-mt-20 border-t border-stone-100 pt-8 pb-8">
+            <h2 class="font-serif text-2xl font-bold mb-4">Achievements & Personal</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                <div class="col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="flex items-center p-3 bg-stone-800 text-white rounded shadow-sm">
+                        <div class="mr-3 text-xl">🏆</div>
+                        <div>
+                            <div class="font-bold text-earth-gold text-xs uppercase">National Level</div>
+                            <div class="font-semibold">Hero Dirt Bike Racer</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-white border border-stone-200 rounded shadow-sm">
+                        <div class="mr-3 text-xl">🎖️</div>
+                        <div>
+                            <div class="font-bold text-stone-500 text-xs uppercase">Army Wing</div>
+                            <div class="font-semibold text-stone-900">NCC 'C' Certificate</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center p-3 bg-white border border-stone-200 rounded shadow-sm">
+                        <div class="mr-3 text-xl">⚜️</div>
+                        <div>
+                            <div class="font-bold text-stone-500 text-xs uppercase">National Award</div>
+                            <div class="font-semibold text-stone-900">Bharat Scouts & Guides</div>
+                        </div>
+                    </div>
+                    <div class="p-3 bg-stone-50 border border-stone-200 rounded flex flex-col justify-center">
+                        <span class="text-xs font-bold text-stone-400 uppercase mb-1">Interests</span>
+                        <div class="text-xs text-stone-700">Travel, Stargazing, Nature, Reading</div>
+                    </div>
+                </div>
+                <div class="p-4 bg-white border border-stone-200 rounded shadow-sm flex flex-col justify-between">
+                    <ul class="space-y-1 text-xs text-stone-600">
+                        <li class="flex justify-between"><span>DOB:</span> <span class="font-medium text-stone-900">16 Mar 1998</span></li>
+                        <li class="flex justify-between"><span>Status:</span> <span class="font-medium text-stone-900">Single</span></li>
+                        <li class="flex justify-between"><span>Lang:</span> <span class="font-medium text-stone-900">Eng, Hindi</span></li>
+                    </ul>
+                    <div class="mt-2 pt-2 border-t border-stone-100 text-[10px] text-stone-400 italic leading-tight">
+                        Family background in Army & Police. Values discipline & modern thought.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center py-4 text-stone-300 text-xs border-t border-stone-200">
+            <p>© 2024 Rudra Pratap Sahu. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        // --- DATA STORE ---
+        const experienceData = [
+            { id: 'yamaha', role: 'Sales & Marketing Executive', company: 'Raipur Yamaha Autocare', location: 'Telibandha', period: 'Aug 2024 - Present', durationMonths: 5, color: '#b45309', details: ['Managing sales operations and customer relations.', 'Developing marketing strategies to increase footfall.', 'Driving sales growth through targeted campaigns.', 'Direct customer engagement and lead conversion.'] },
+            { id: 'openroad', role: 'Sales Manager', company: 'Open Road Riding Gears', location: 'Raipur', period: 'July 2023 - Mar 2024', durationMonths: 8, color: '#44403c', details: ['Setting clear goals and sales targets.', 'Training and developing the sales team.', 'Implementing effective sales processes.', 'Fostering teamwork and collaboration.'] },
+            { id: 'holiday', role: 'Travel Consultant', company: 'Har Din Holiday', location: 'Raipur', period: 'Mar 2023 - Oct 2023', durationMonths: 7, color: '#78716c', details: ['Sold and coordinated tour packages and transport.', 'Advised clients on destinations and customs.', 'Managed bookings, payments, and fees.', 'Curated personalized travel itineraries.'] },
+            { id: 'monks', role: 'Event Manager', company: 'Innovative Monks Events', location: 'Raipur', period: 'Jan 2017 - Dec 2018', durationMonths: 23, color: '#a8a29e', details: ['Short and long-term event planning.', 'Budget development and marketing strategy.', 'Exceeded sales and profit targets.', 'Vendor management and logistics.'] }
+        ];
+
+        // --- SKILLS CHART ---
+        const ctxSkills = document.getElementById('skillsChart').getContext('2d');
+        new Chart(ctxSkills, {
+            type: 'radar',
+            data: { labels: ['Leadership', 'Sales', 'Event Plan', 'Negotiation', 'Tech/Office', 'Comms'], datasets: [{ label: 'Proficiency', data: [85, 90, 80, 85, 75, 88], fill: true, backgroundColor: 'rgba(180, 83, 9, 0.2)', borderColor: '#b45309', borderWidth: 2, pointBackgroundColor: '#fff', pointBorderColor: '#b45309', pointRadius: 3 }] },
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { angleLines: { color: '#e7e5e4' }, grid: { color: '#e7e5e4' }, pointLabels: { font: { size: 10, family: 'Inter' }, color: '#57534e' }, ticks: { display: false } } }, plugins: { legend: { display: false } } }
+        });
+
+        // --- JOB LIST ---
+        const listContainer = document.getElementById('job-list');
+        experienceData.forEach(job => {
+            const btn = document.createElement('button');
+            btn.className = `w-full text-left px-4 py-3 text-sm hover:bg-stone-50 transition-colors flex justify-between items-center group job-item`;
+            btn.dataset.id = job.id;
+            btn.innerHTML = `<div><div class="font-bold text-stone-800 group-hover:text-earth-gold transition-colors">${job.company}</div><div class="text-xs text-stone-500">${job.role}</div></div><div class="text-[10px] text-stone-400 font-mono">${job.period}</div>`;
+            btn.onclick = () => updateJobDetails(job.id);
+            listContainer.appendChild(btn);
+        });
+
+        function updateJobDetails(jobId) {
+            const job = experienceData.find(j => j.id === jobId);
+            const container = document.getElementById('job-detail-content');
+            document.querySelectorAll('.job-item').forEach(b => {
+                if(b.dataset.id === jobId) { b.classList.add('bg-stone-100', 'border-l-4', 'border-earth-gold', 'pl-3'); b.classList.remove('pl-4'); } 
+                else { b.classList.remove('bg-stone-100', 'border-l-4', 'border-earth-gold', 'pl-3'); b.classList.add('pl-4'); }
+            });
+            container.style.opacity = '0';
+            setTimeout(() => {
+                container.innerHTML = `<div class="mb-4 pb-4 border-b border-stone-200"><div class="flex justify-between items-start mb-2"><h3 class="text-xl font-bold text-stone-900">${job.role}</h3><span class="text-xs bg-stone-200 text-stone-700 px-2 py-1 rounded font-mono">${job.period}</span></div><div class="text-sm font-semibold text-earth-gold">${job.company} <span class="text-stone-400 font-normal">| ${job.location}</span></div></div><div><h4 class="text-xs font-bold text-stone-400 uppercase mb-2">Key Responsibilities</h4><ul class="space-y-2">${job.details.map(d => `<li class="flex items-start text-sm text-stone-700"><span class="text-earth-gold mr-2 mt-1.5 text-[10px]">●</span><span class="leading-relaxed">${d}</span></li>`).join('')}</ul></div>`;
+                container.style.opacity = '1';
+            }, 200);
+        }
+
+        function switchTab(tab) {
+            const viewEdu = document.getElementById('view-edu');
+            const viewProj = document.getElementById('view-proj');
+            const btnEdu = document.getElementById('tab-edu');
+            const btnProj = document.getElementById('tab-proj');
+            if (tab === 'edu') {
+                viewEdu.classList.remove('hidden'); viewProj.classList.add('hidden');
+                btnEdu.classList.add('bg-white', 'text-stone-800', 'shadow-sm'); btnEdu.classList.remove('text-stone-500', 'hover:text-stone-800');
+                btnProj.classList.remove('bg-white', 'text-stone-800', 'shadow-sm'); btnProj.classList.add('text-stone-500', 'hover:text-stone-800');
+            } else {
+                viewEdu.classList.add('hidden'); viewProj.classList.remove('hidden');
+                btnProj.classList.add('bg-white', 'text-stone-800', 'shadow-sm'); btnProj.classList.remove('text-stone-500', 'hover:text-stone-800');
+                btnEdu.classList.remove('bg-white', 'text-stone-800', 'shadow-sm'); btnEdu.classList.add('text-stone-500', 'hover:text-stone-800');
+            }
+        }
+        function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); document.getElementById(`nav-${id}`)?.classList.add('active'); }
+        function toggleMobile() { document.getElementById('mobile-menu').classList.add('hidden'); }
+        updateJobDetails('yamaha'); document.getElementById('nav-overview').classList.add('active');
+
+    </script>
+</body>
+</html>
