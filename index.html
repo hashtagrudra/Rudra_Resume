@@ -10,9 +10,6 @@
     
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Markdown Parser for AI Responses -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
@@ -60,34 +57,9 @@
 
         .nav-link.active { color: #b45309; font-weight: 700; border-bottom: 2px solid #b45309; }
         li { margin-bottom: 0.25rem; }
-
-        /* Chat Widget Animations */
-        .chat-slide-in { animation: slideIn 0.3s ease-out forwards; }
-        .chat-slide-out { animation: slideOut 0.3s ease-in forwards; }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes slideOut {
-            from { opacity: 1; transform: translateY(0) scale(1); }
-            to { opacity: 0; transform: translateY(20px) scale(0.95); }
-        }
-
-        /* Typing Indicator */
-        .typing-dot {
-            animation: typing 1.4s infinite ease-in-out both;
-        }
-        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
-        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
-        
-        @keyframes typing {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1); }
-        }
     </style>
 </head>
-<body class="bg-neutral-warm text-stone-dark font-sans leading-relaxed selection:bg-earth-gold selection:text-white relative">
+<body class="bg-neutral-warm text-stone-dark font-sans leading-relaxed selection:bg-earth-gold selection:text-white">
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-earth-muted shadow-sm h-14">
@@ -131,10 +103,6 @@
                 <div class="flex flex-wrap gap-3 pt-2 action-buttons">
                     <a href="mailto:rudrapr03@gmail.com" class="bg-stone-900 text-white px-5 py-2 rounded-md text-sm font-medium hover:bg-stone-800 transition-colors shadow-md">Contact Me</a>
                     <a href="https://www.linkedin.com/in/rudra-sahu" target="_blank" class="border border-stone-300 text-stone-700 px-5 py-2 rounded-md text-sm font-medium hover:border-earth-gold hover:text-earth-gold transition-colors">LinkedIn</a>
-                    <!-- AI Trigger Button (Inline) -->
-                    <button onclick="toggleChat()" class="flex items-center gap-2 bg-gradient-to-r from-earth-gold to-amber-600 text-white px-5 py-2 rounded-md text-sm font-medium hover:shadow-lg transition-all transform hover:-translate-y-0.5 border border-transparent">
-                        <span>✨ Ask My AI</span>
-                    </button>
                 </div>
                 <div class="flex text-xs text-stone-500 pt-2 space-x-4">
                     <span>📍 Raipur, Chhattisgarh</span>
@@ -325,52 +293,6 @@
         </footer>
     </main>
 
-    <!-- FLOATING CHAT WIDGET -->
-    <div class="fixed bottom-6 right-6 z-50">
-        <!-- Toggle Button -->
-        <button id="chat-toggle-btn" onclick="toggleChat()" class="bg-stone-900 text-white p-4 rounded-full shadow-lg hover:bg-earth-gold transition-colors duration-300 flex items-center justify-center border-2 border-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-            </svg>
-        </button>
-
-        <!-- Chat Window (Hidden by default) -->
-        <div id="chat-window" class="hidden absolute bottom-16 right-0 w-80 sm:w-96 bg-white rounded-xl shadow-2xl border border-stone-200 overflow-hidden flex flex-col h-[400px]">
-            <!-- Header -->
-            <div class="bg-stone-900 text-white p-4 flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                    <span class="font-bold text-sm tracking-wide">Rudra's AI Assistant ✨</span>
-                </div>
-                <button onclick="toggleChat()" class="text-stone-400 hover:text-white">&times;</button>
-            </div>
-            
-            <!-- Messages Area -->
-            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto bg-stone-50 space-y-3 text-sm">
-                <!-- Initial Bot Message -->
-                <div class="flex gap-2">
-                    <div class="w-8 h-8 rounded-full bg-earth-gold flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">AI</div>
-                    <div class="bg-white p-3 rounded-lg rounded-tl-none border border-stone-200 shadow-sm text-stone-700">
-                        Hello! I've read Rudra's entire portfolio. Ask me anything about his experience, skills, or projects!
-                    </div>
-                </div>
-            </div>
-
-            <!-- Input Area -->
-            <div class="p-3 bg-white border-t border-stone-100">
-                <div class="flex gap-2">
-                    <input type="text" id="chat-input" placeholder="Ask about Rudra's sales exp..." class="flex-1 border border-stone-200 rounded-md px-3 py-2 text-sm focus:outline-none focus:border-earth-gold" onkeypress="handleKeyPress(event)">
-                    <button onclick="sendMessage()" class="bg-stone-900 text-white p-2 rounded-md hover:bg-earth-gold transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="text-[10px] text-center text-stone-400 mt-2">Powered by Gemini AI ✨</div>
-            </div>
-        </div>
-    </div>
-
     <script>
         // --- DATA STORE ---
         const experienceData = [
@@ -431,155 +353,6 @@
         function scrollToSection(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active')); document.getElementById(`nav-${id}`)?.classList.add('active'); }
         function toggleMobile() { document.getElementById('mobile-menu').classList.add('hidden'); }
         updateJobDetails('yamaha'); document.getElementById('nav-overview').classList.add('active');
-
-        // --- GEMINI AI INTEGRATION ---
-        
-        // 1. Chat Toggle Logic
-        function toggleChat() {
-            const chatWin = document.getElementById('chat-window');
-            if(chatWin.classList.contains('hidden')) {
-                chatWin.classList.remove('hidden');
-                chatWin.classList.add('chat-slide-in');
-                chatWin.classList.remove('chat-slide-out');
-            } else {
-                chatWin.classList.add('chat-slide-out');
-                chatWin.classList.remove('chat-slide-in');
-                setTimeout(() => chatWin.classList.add('hidden'), 280);
-            }
-        }
-
-        // 2. Data Gathering (Context Construction)
-        function getPortfolioContext() {
-            const name = "Rudra Pratap Sahu";
-            const currentRole = "Sales & Marketing Executive at Raipur Yamaha Autocare";
-            const experienceText = experienceData.map(j => `${j.role} at ${j.company} (${j.period}): ${j.details.join(' ')}`).join('\n');
-            const skills = "Leadership, Sales, Event Planning, Negotiation, Technical Proficiency (MS Office), Communication.";
-            const education = "Ph.D. (Pursuing) at PRSU, PGDM (Marketing) from DY Patil Pune, B.Com from PRSU.";
-            
-            return `
-                You are an AI assistant for the portfolio of ${name}.
-                Here is Rudra's professional profile:
-                Current Role: ${currentRole}
-                
-                Experience:
-                ${experienceText}
-                
-                Skills: ${skills}
-                
-                Education: ${education}
-                
-                Key Achievements: Hero Dirt Bike Racer (National), NCC 'C' Certificate, Bharat Scouts & Guides National Award.
-                
-                Guidelines:
-                1. Answer questions as if you are representing Rudra.
-                2. Be concise, professional, yet friendly.
-                3. Highlighting his sales and marketing expertise.
-                4. Keep answers short (max 2-3 sentences unless asked for details).
-            `;
-        }
-
-        // 3. Chat Logic
-        async function sendMessage() {
-            const inputField = document.getElementById('chat-input');
-            const userText = inputField.value.trim();
-            if(!userText) return;
-
-            // Add User Message
-            addMessage('user', userText);
-            inputField.value = '';
-
-            // Add Typing Indicator
-            const loadingId = addTypingIndicator();
-
-            try {
-                // Call Gemini API
-                const apiKey = ""; // System will inject key
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-                
-                const payload = {
-                    contents: [{
-                        parts: [{ text: userText }]
-                    }],
-                    systemInstruction: {
-                        parts: [{ text: getPortfolioContext() }]
-                    }
-                };
-
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const data = await response.json();
-                
-                // Remove Typing Indicator
-                const loadingElem = document.getElementById(loadingId);
-                if(loadingElem) loadingElem.remove();
-
-                if (data.error) {
-                    addMessage('ai', "Sorry, I'm having trouble connecting right now. Please try again.");
-                    console.error("Gemini API Error:", data.error);
-                } else {
-                    const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "I'm not sure how to answer that.";
-                    addMessage('ai', aiText);
-                }
-
-            } catch (error) {
-                console.error("Fetch Error:", error);
-                const loadingElem = document.getElementById(loadingId);
-                if(loadingElem) loadingElem.remove();
-                addMessage('ai', "Network error. Please check your connection.");
-            }
-        }
-
-        // 4. UI Helpers
-        function addMessage(sender, text) {
-            const container = document.getElementById('chat-messages');
-            const div = document.createElement('div');
-            div.className = "flex gap-2 " + (sender === 'user' ? "flex-row-reverse" : "");
-            
-            const avatar = sender === 'ai' 
-                ? `<div class="w-8 h-8 rounded-full bg-earth-gold flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">AI</div>`
-                : `<div class="w-8 h-8 rounded-full bg-stone-700 flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">You</div>`;
-            
-            const bubbleClass = sender === 'ai'
-                ? "bg-white border border-stone-200 text-stone-700 rounded-tl-none"
-                : "bg-stone-800 text-white rounded-tr-none";
-
-            // Parse simple markdown if needed, here just raw text for safety or simple formatting
-            div.innerHTML = `
-                ${avatar}
-                <div class="${bubbleClass} p-3 rounded-lg shadow-sm max-w-[80%] text-sm leading-relaxed">
-                    ${marked.parse(text)}
-                </div>
-            `;
-            container.appendChild(div);
-            container.scrollTop = container.scrollHeight;
-        }
-
-        function addTypingIndicator() {
-            const container = document.getElementById('chat-messages');
-            const id = 'loading-' + Date.now();
-            const div = document.createElement('div');
-            div.id = id;
-            div.className = "flex gap-2";
-            div.innerHTML = `
-                <div class="w-8 h-8 rounded-full bg-earth-gold flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">AI</div>
-                <div class="bg-white border border-stone-200 p-3 rounded-lg rounded-tl-none shadow-sm flex gap-1 items-center">
-                    <div class="w-1.5 h-1.5 bg-stone-400 rounded-full typing-dot"></div>
-                    <div class="w-1.5 h-1.5 bg-stone-400 rounded-full typing-dot"></div>
-                    <div class="w-1.5 h-1.5 bg-stone-400 rounded-full typing-dot"></div>
-                </div>
-            `;
-            container.appendChild(div);
-            container.scrollTop = container.scrollHeight;
-            return id;
-        }
-
-        function handleKeyPress(e) {
-            if (e.key === 'Enter') sendMessage();
-        }
 
     </script>
 </body>
