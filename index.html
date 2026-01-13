@@ -297,7 +297,7 @@
 
         /* --- PRINT STYLES (BASIC RESET) --- */
         @media print {
-            #cursor-dot, #cursor-outline, #scroll-progress, #back-to-top, .action-buttons, nav, #theme-toggle, .fixed.left-6, .scroll-down-arrow, #preloader, #theme-picker, #marquee-section, #connect-hub, #faq-section, .floating-whatsapp, #newsletter-section, #modal-overlay { display: none !important; }
+            #cursor-dot, #cursor-outline, #scroll-progress, #back-to-top, .action-buttons, nav, #theme-toggle, .fixed.left-6, .scroll-down-arrow, #preloader, #theme-picker, #marquee-section, #connect-hub, #faq-section, .floating-whatsapp, #newsletter-section, #modal-overlay, #learning { display: none !important; }
             body { background: white !important; color: black !important; }
             section { page-break-inside: avoid; }
         }
@@ -400,6 +400,7 @@
                         <button onclick="scrollToSection('experience')" class="magnetic-btn nav-link text-stone-600 dark:text-stone-400 hover:text-earth-gold dark:hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors hover-trigger" id="nav-experience">Experience</button>
                         <button onclick="scrollToSection('events')" class="magnetic-btn nav-link text-stone-600 dark:text-stone-400 hover:text-earth-gold dark:hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors hover-trigger" id="nav-events">Events</button>
                         <button onclick="scrollToSection('skills')" class="magnetic-btn nav-link text-stone-600 dark:text-stone-400 hover:text-earth-gold dark:hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors hover-trigger" id="nav-skills">Skills</button>
+                        <button onclick="scrollToSection('learning')" class="magnetic-btn nav-link text-stone-600 dark:text-stone-400 hover:text-earth-gold dark:hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors hover-trigger" id="nav-learning">Growth</button>
                         <button onclick="scrollToSection('education')" class="magnetic-btn nav-link text-stone-600 dark:text-stone-400 hover:text-earth-gold dark:hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors hover-trigger" id="nav-education">Academics</button>
                         <button onclick="scrollToSection('connect-hub')" class="magnetic-btn nav-link text-stone-600 dark:text-stone-400 hover:text-earth-gold dark:hover:text-earth-gold px-2 py-1 text-sm font-medium transition-colors hover-trigger" id="nav-connect-hub">Contact</button>
                     </div>
@@ -425,6 +426,7 @@
                 <button onclick="scrollToSection('experience'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800">Experience</button>
                 <button onclick="scrollToSection('events'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800">Events</button>
                 <button onclick="scrollToSection('skills'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800">Skills</button>
+                <button onclick="scrollToSection('learning'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800">Growth</button>
                 <button onclick="scrollToSection('education'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800">Education</button>
                 <button onclick="scrollToSection('connect-hub'); toggleMobile()" class="block w-full text-left px-3 py-2 text-sm font-medium text-stone-600 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800">Contact</button>
             </div>
@@ -466,10 +468,6 @@
                         <span class="flex items-center gap-1">
                             <svg class="w-4 h-4 text-earth-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                             rudrapr03@gmail.com
-                        </span>
-                        <span class="flex items-center gap-1">
-                            <svg class="w-4 h-4 text-earth-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            +91 6260583763
                         </span>
                     </div>
 
@@ -775,6 +773,68 @@
                     <div class="bg-purple-50/50 dark:bg-purple-900/20 p-3 rounded border border-purple-100 dark:border-purple-800/50 glass-card">
                         <h4 class="font-bold text-stone-800 dark:text-stone-200 text-xs mb-1">Technical Proficiency</h4>
                         <p class="text-[10px] text-stone-600 dark:text-stone-400 leading-relaxed"><strong>Social Media (Instagram, Facebook)</strong>, MS Office Suite (Excel, PowerPoint, Word), Computer Operations, Business Communication Tools.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: Learning & Growth Section -->
+        <section id="learning" class="reveal-on-scroll scroll-mt-20 border-t border-stone-100 dark:border-stone-800 pt-8">
+            <h2 class="font-serif text-2xl font-bold mb-6 text-stone-900 dark:text-white">Learning & Growth</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Digital Bookshelf -->
+                <div class="bg-stone-50 dark:bg-stone-900/30 p-6 rounded-xl border border-stone-100 dark:border-stone-800">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">📚</span>
+                        <h3 class="font-bold text-stone-900 dark:text-white">Digital Bookshelf</h3>
+                    </div>
+                    <div class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                        <!-- Book 1 -->
+                        <div class="min-w-[100px] group cursor-pointer hover:-translate-y-1 transition-transform">
+                            <div class="h-32 bg-amber-800 rounded-r-md rounded-l-sm shadow-md flex items-center justify-center relative overflow-hidden border-l-4 border-amber-900">
+                                <span class="text-[10px] text-amber-100 font-bold text-center px-1 rotate-90 whitespace-nowrap">Atomic Habits</span>
+                            </div>
+                            <p class="text-[10px] font-bold text-stone-700 dark:text-stone-300 mt-2 text-center leading-tight">Atomic Habits</p>
+                        </div>
+                        <!-- Book 2 -->
+                        <div class="min-w-[100px] group cursor-pointer hover:-translate-y-1 transition-transform">
+                            <div class="h-32 bg-blue-800 rounded-r-md rounded-l-sm shadow-md flex items-center justify-center relative overflow-hidden border-l-4 border-blue-900">
+                                <span class="text-[10px] text-blue-100 font-bold text-center px-1 rotate-90 whitespace-nowrap">Psychology of Selling</span>
+                            </div>
+                            <p class="text-[10px] font-bold text-stone-700 dark:text-stone-300 mt-2 text-center leading-tight">Psychology of Selling</p>
+                        </div>
+                        <!-- Book 3 -->
+                        <div class="min-w-[100px] group cursor-pointer hover:-translate-y-1 transition-transform">
+                            <div class="h-32 bg-emerald-800 rounded-r-md rounded-l-sm shadow-md flex items-center justify-center relative overflow-hidden border-l-4 border-emerald-900">
+                                <span class="text-[10px] text-emerald-100 font-bold text-center px-1 rotate-90 whitespace-nowrap">Rich Dad Poor Dad</span>
+                            </div>
+                            <p class="text-[10px] font-bold text-stone-700 dark:text-stone-300 mt-2 text-center leading-tight">Rich Dad Poor Dad</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certifications Wall -->
+                <div class="bg-stone-50 dark:bg-stone-900/30 p-6 rounded-xl border border-stone-100 dark:border-stone-800">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="text-2xl">🎖️</span>
+                        <h3 class="font-bold text-stone-900 dark:text-white">Certifications Wall</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 bg-white dark:bg-dark-card p-3 rounded border border-stone-200 dark:border-stone-700 shadow-sm">
+                            <div class="w-10 h-10 bg-red-100 text-red-600 rounded-full flex items-center justify-center font-bold text-xs">NCC</div>
+                            <div>
+                                <div class="text-sm font-bold text-stone-900 dark:text-white">NCC 'C' Certificate</div>
+                                <div class="text-[10px] text-stone-500">Army Wing • Leadership & Discipline</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 bg-white dark:bg-dark-card p-3 rounded border border-stone-200 dark:border-stone-700 shadow-sm">
+                            <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold text-xs">BSG</div>
+                            <div>
+                                <div class="text-sm font-bold text-stone-900 dark:text-white">Bharat Scouts & Guides</div>
+                                <div class="text-[10px] text-stone-500">National Award • Community Service</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
