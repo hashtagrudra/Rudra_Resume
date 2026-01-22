@@ -95,7 +95,7 @@
             .dark\:text-gray-300, .dark\:text-gray-400 { color: #4b5563 !important; }
             
             /* Remove animations for print */
-            .animate-fade-in-up, .animate-grow-width, .animate-typing {
+            .animate-fade-in-up, .animate-grow-width, .animate-typing, .counter-anim {
                 animation: none !important;
                 opacity: 1 !important;
                 transform: none !important;
@@ -113,9 +113,24 @@
                 box-shadow: 0 0 20px rgba(0,0,0,0.1);
             }
         }
+        
+        /* Scroll Progress Bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: #3498db;
+            z-index: 100;
+            width: 0%;
+            transition: width 0.1s;
+        }
     </style>
 </head>
 <body class="bg-gray-200 dark:bg-gray-900 font-sans text-gray-800 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" class="no-print"></div>
 
     <!-- Floating Action Buttons -->
     <div class="no-print fixed bottom-8 right-8 z-50 flex flex-col gap-3 items-end">
@@ -124,6 +139,11 @@
         <button id="theme-toggle" class="bg-gray-800 dark:bg-yellow-500 text-white dark:text-gray-900 px-4 py-3 rounded-full shadow-lg transition-all hover:scale-105" title="Toggle Dark Mode">
             <i class="fas fa-moon dark:hidden"></i>
             <i class="fas fa-sun hidden dark:block"></i>
+        </button>
+
+        <!-- Save Contact (vCard) -->
+        <button onclick="downloadVCard()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full shadow-lg transition-all flex items-center gap-2 font-medium transform hover:scale-105">
+            <i class="fas fa-address-card text-xl"></i> <span class="hidden sm:inline">Save Contact</span>
         </button>
 
         <!-- WhatsApp Button -->
@@ -368,6 +388,22 @@
             <!-- Right Content (67%) -->
             <div class="w-full md:w-2/3 p-6 md:p-8 flex flex-col animate-fade-in-up delay-200">
                 
+                <!-- Live Career Stats -->
+                <section class="mb-8 grid grid-cols-3 gap-4">
+                    <div class="bg-blue-50 dark:bg-slate-800 p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow">
+                        <span class="block text-2xl font-bold text-primary dark:text-accent" id="exp-count">3</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Years Exp.</span>
+                    </div>
+                    <div class="bg-blue-50 dark:bg-slate-800 p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow">
+                        <span class="block text-2xl font-bold text-primary dark:text-accent" id="projects-count">50+</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Events</span>
+                    </div>
+                    <div class="bg-blue-50 dark:bg-slate-800 p-4 rounded-lg text-center shadow-sm hover:shadow-md transition-shadow">
+                        <span class="block text-2xl font-bold text-primary dark:text-accent" id="clients-count">100+</span>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 font-semibold uppercase">Clients</span>
+                    </div>
+                </section>
+
                 <!-- Experience -->
                 <section class="mb-8">
                     <h2 class="text-xl font-bold text-primary dark:text-white border-b-2 border-gray-200 dark:border-slate-600 pb-2 mb-6 flex items-center">
@@ -521,6 +557,61 @@
                 localStorage.theme = 'light';
             }
         });
+
+        // VCard Download Logic
+        function downloadVCard() {
+            const vCardData = `BEGIN:VCARD
+VERSION:3.0
+N:Sahu;Rudra;Pratap;;
+FN:Rudra Pratap Sahu
+ORG:Raipur Yamaha Autocare
+TITLE:Sales & Marketing Executive
+TEL;TYPE=CELL:+916260583763
+EMAIL:rudrapr03@gmail.com
+ADR;TYPE=HOME:;;Tikrapara;Raipur;Chhattisgarh;;India
+URL:https://www.linkedin.com/in/rudra-sahu-605b781a3
+END:VCARD`;
+            const blob = new Blob([vCardData], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Rudra_Pratap_Sahu.vcf';
+            a.click();
+        }
+
+        // Animated Stats Counter
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start) + (obj.dataset.suffix || "");
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Trigger animations on load
+        window.onload = () => {
+            animateValue(document.getElementById("exp-count"), 0, 3, 1500);
+            document.getElementById("exp-count").dataset.suffix = "";
+            
+            animateValue(document.getElementById("projects-count"), 0, 50, 1500);
+            document.getElementById("projects-count").dataset.suffix = "+";
+            
+            animateValue(document.getElementById("clients-count"), 0, 100, 1500);
+            document.getElementById("clients-count").dataset.suffix = "+";
+        };
+
+        // Scroll Progress Bar
+        window.onscroll = function() {
+            var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var scrolled = (winScroll / height) * 100;
+            document.getElementById("scroll-progress").style.width = scrolled + "%";
+        };
     </script>
 </body>
 </html>
